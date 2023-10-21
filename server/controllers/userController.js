@@ -24,7 +24,12 @@ export const userRegister = async (req, res, next) => {
 
     res
       .status(201)
-      .cookie("token", token, { maxAge: 1 * 24 * 3600 * 1000 })
+      .cookie("token", token, {
+        httpOnly: true,
+        maxAge: 1 * 24 * 3600 * 1000,
+        sameSite: "None",
+        secure: true,
+      })
       .json({
         success: true,
         message: "Account created",
@@ -51,7 +56,12 @@ export const userLogin = async (req, res, next) => {
 
     res
       .status(200)
-      .cookie("token", token, { maxAge: 1 * 24 * 3600 * 1000 })
+      .cookie("token", token, {
+        maxAge: 1 * 24 * 3600 * 1000,
+        httpOnly: true,
+        sameSite: "None",
+        secure: true,
+      })
       .json({
         success: true,
         message: "Successfully Logged in",
@@ -62,10 +72,18 @@ export const userLogin = async (req, res, next) => {
 };
 
 export const userLogout = (req, res) => {
-  res.status(200).cookie("token", "", { maxAge: 0 }).json({
-    success: true,
-    message: "logged out successfully",
-  });
+  res
+    .status(200)
+    .cookie("token", "", {
+      maxAge: 0,
+      httpOnly: true,
+      sameSite: "None",
+      secure: true,
+    })
+    .json({
+      success: true,
+      message: "logged out successfully",
+    });
 };
 
 export const getMyProfile = (req, res) => {
@@ -86,10 +104,18 @@ export const deleteUser = async (req, res, next) => {
     await NotesModel.deleteMany({ user: id });
     await user.deleteOne();
 
-    res.cookie("token", "", { maxAge: 0 }).status(200).json({
-      success: true,
-      message: "Account successfully deleted",
-    });
+    res
+      .cookie("token", "", {
+        maxAge: 0,
+        httpOnly: true,
+        sameSite: "None",
+        secure: true,
+      })
+      .status(200)
+      .json({
+        success: true,
+        message: "Account successfully deleted",
+      });
   } catch (error) {
     next(error);
   }
