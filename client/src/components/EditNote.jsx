@@ -62,6 +62,7 @@ const EditNote = () => {
       <img
         className="h-5 absolute top-0 right-0 -translate-x-full translate-y-full cursor-pointer"
         onClick={closeEditPopup}
+        disabled={loading}
         src={cross}
         alt="close"
       />
