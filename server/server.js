@@ -4,7 +4,7 @@ import { connectDB } from "./data/database.js";
 
 config();
 
-const PORT = process.env.PORT || 4000;
+const PORT = process.env.PORT || 3000;
 
 connectDB(process.env.DB_URL);
 
