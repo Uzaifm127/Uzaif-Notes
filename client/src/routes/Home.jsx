@@ -154,6 +154,10 @@ const Home = () => {
                 editClick={() => {
                   setEditPopup(true);
                   setNoteId(element._id);
+                  setClickedNoteContent({
+                    title: element.title,
+                    description: element.description,
+                  });
                 }}
                 readClick={() => {
                   setReadPopup(true);

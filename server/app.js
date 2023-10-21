@@ -1,9 +1,12 @@
 import express from "express";
 import { userRouter } from "./APIs/userAPI.js";
 import { notesRouter } from "./APIs/notesAPI.js";
+import { config } from "dotenv";
 import cors from "cors";
 import { errorMiddleware } from "./middlewares/errorMiddleware.js";
 import cookieParser from "cookie-parser";
+
+config();
 
 export const app = express();
 
@@ -11,7 +14,7 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(
   cors({
-    origin: ["https://uzaif-keep.vercel.app"],
+    origin: [process.env.FRONTEND_URL],
     methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true,
   })

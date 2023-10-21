@@ -1,8 +1,11 @@
 import { UserModel } from "../models/userModel.js";
 import { NotesModel } from "../models/notesModel.js";
+import { config } from "dotenv";
 import bcrypt from "bcrypt";
 import { CustomError } from "../middlewares/errorMiddleware.js";
 import jwt from "jsonwebtoken";
+
+config();
 
 export const userRegister = async (req, res, next) => {
   try {
